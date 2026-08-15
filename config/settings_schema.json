@@ -1,1 +1,38 @@
-[]
+[
+{
+  "name": "Layout",
+  "settings": [
+    {
+      "type": "range",
+      "id": "page_width",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Page width",
+      "default": 16
+    }
+  ]
+},
+{
+  "name": "Typography",
+  "settings": [
+    {
+      "type": "font_picker",
+      "id": "font_heading",
+      "label": "Heading Font",
+      "default": "assistant_n4"
+    },
+    {
+      "type": "range",
+      "id": "font_size_base",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Base Font Size",
+      "default": 16
+    }
+  ]
+}
+]

@@ -5,18 +5,20 @@
     <title>Shopify theme development</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{ content_for_header }}
+    {% render 'theme-variable' %}
   </head>
   <body>
     <header>
       <h1>Playground with codersachin shrma.change made now.
       </h1>
+      {% sections 'header-group' %}
     </header>
     <main>
       {{ content_for_layout }}
     </main>
 
     <footer>
-      <p>© 2024 Playground</p>
+       {% sections 'footer-group' %}
     </footer>
   </body>
 </html>

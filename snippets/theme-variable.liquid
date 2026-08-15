@@ -1,0 +1,8 @@
+{% style %}
+  {{ settings.font_heading | font_face: font_display: 'swap' }}
+
+  :root {
+     --page-width: {{ settings.page_width }}px;
+     --body-font: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
+  }
+{% endstyle %}
