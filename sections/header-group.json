@@ -20,8 +20,8 @@
       "type": "header",
       "settings": {
         "header_logo": "shopify://shop_images/create-a-png-without-background-logo-for-my-store.png",
-        "logo_height": 55,
-        "header_alignment": "left",
+        "logo_height": 120,
+        "header_alignment": "inline-left",
         "menu": "collection-menu",
         "bg_color": "#000000",
         "text_color": "#d2d6de",

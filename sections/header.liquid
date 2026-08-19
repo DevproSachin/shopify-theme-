@@ -1,10 +1,12 @@
-<div class="website_header alignment-{{ section.settings.header_alignment }}" style="
-  --header-bg: {{ section.settings.bg_color }};
-  --header-text: {{ section.settings.text_color }};
-  --header-accent: {{ section.settings.accent_color }};
-  --logo-max-height: {{ section.settings.logo_height }}px;
-">
-  
+<div
+  class="website_header alignment-{{ section.settings.header_alignment }}"
+  style="
+    --header-bg: {{ section.settings.bg_color }};
+    --header-text: {{ section.settings.text_color }};
+    --header-accent: {{ section.settings.accent_color }};
+    --logo-max-height: {{ section.settings.logo_height }}px;
+  "
+>
   <!-- 1. LEFT / LOGO SIDE -->
   <div class="left-side">
     {%- if section.settings.header_logo != blank -%}
@@ -15,19 +17,30 @@
       <a href="/" class="shop-name">{{ shop.name }}</a>
     {%- endif -%}
   </div>
-  
+
   <!-- 2. CENTER / NAVIGATION SIDE -->
   <div class="center-side">
     <ul class="menu">
       {% for link in section.settings.menu.links %}
         <li class="menu-link">
-          <a href="{{ link.url }}">{{ link.title }}</a>
+          <a href="{{ link.url }}">
+            {{- link.title }}
+             {% if link.links.size > 0 %}
+            {% render 'icon',
+              icon_name: 'chevron-down',
+              icon_stroke: 1.5,
+            %}
+         {% endif %}
+          </a>
 
           {% if link.links.size > 0 %}
             <ul class="menu dropdown-child">
               {% for child_link in link.links %}
                 <li class="menu-link">
-                  <a href="{{ child_link.url }}">{{ child_link.title }}</a>
+                  <a href="{{ child_link.url }}">
+                    {{- child_link.title }}
+                    {% render 'icon', icon_name: 'chevron-right', icon_stroke: 1.5 %}
+                  </a>
 
                   {% if child_link.links.size > 0 %}
                     <ul class="menu dropdown-grandchild">
@@ -51,7 +64,17 @@
   <div class="right-side">
     <a href="/cart" class="header-cart-btn" aria-label="Cart">
       <!-- Minimal SVG Cart Icon -->
-      <svg class="icon icon-cart" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <svg
+        class="icon icon-cart"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+        stroke="currentColor"
+        stroke-width="2"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <circle cx="9" cy="21" r="1"></circle>
         <circle cx="20" cy="21" r="1"></circle>
         <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>

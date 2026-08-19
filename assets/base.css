@@ -129,7 +129,7 @@ h1, h2, h3, h4, h5, h6,
   font-size: 15px;
   font-weight: 500;
   padding: 10px 0;
-  display: inline-block;
+  display: inline-flex;
   transition: color 0.3s ease;
 }
 
