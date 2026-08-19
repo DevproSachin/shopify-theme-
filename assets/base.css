@@ -1,0 +1,242 @@
+/* --- A. Base Font Size (Aapka dynamic slider chalane ke liye) --- */
+html {
+  font-size: var(--font-size-base); /* Editor ka Base Font Size slider yahan kaam karega */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem; /* 1rem = jo size aapne slider se set kiya hai (e.g., 16px) */
+  line-height: 1.5;
+}
+
+/* --- B. Headings (Aapka dynamic font_picker chalane ke liye) --- */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-weight: var(--font-heading-weight);
+}
+
+/* --- C. Page Layout Width (Aapka dynamic width slider chalane ke liye) --- */
+.page-width {
+  max-width: var(--page-width); /* Editor ka Page Width slider yahan kaam karega */
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
+}
+
+
+/* --- Custom Banner Component CSS (Static Structure) --- */
+.banner-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.banner__content {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Spacing between heading and text */
+}
+
+.banner__heading {
+  margin: 0;
+  font-family: var(--font-heading-family); /* Global variable se automatic load hoga */
+  line-height: 1.2;
+  font-weight: bold;
+}
+
+.banner__text {
+  margin: 0;
+  line-height: 1.5;
+}
+
+
+/* --- Base Reset & General Header Styling --- */
+/* --- Base Reset & General Header Styling --- */
+.website_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--header-bg);
+  padding: 15px 60px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); 
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  position: relative;
+  z-index: 999;
+}
+
+/* Base side configurations for layout shifting */
+.website_header .left-side,
+.website_header .center-side,
+.website_header .right-side {
+  display: flex;
+  align-items: center;
+}
+
+.left-side img {
+  display: block;
+  max-height: var(--logo-max-height);
+  width: auto;
+}
+
+.left-side .shop-name {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--header-text);
+  white-space: nowrap;
+}
+
+/* --- Layout Alignment Classes (Controlled by Shopify Schema Select) --- */
+
+/* Style 1: Logo Left, Menu Center (Standard Modern) */
+.website_header.alignment-left .left-side { order: 1; flex: 1; justify-content: flex-start; }
+.website_header.alignment-left .center-side { order: 2; flex: 2; justify-content: center; }
+.website_header.alignment-left .right-side { order: 3; flex: 1; justify-content: flex-end; }
+
+/* Style 2: Logo Center, Menu Left (Premium Editorial Look) */
+.website_header.alignment-center .left-side { order: 2; flex: 1; justify-content: center; }
+.website_header.alignment-center .center-side { order: 1; flex: 1; justify-content: flex-start; }
+.website_header.alignment-center .right-side { order: 3; flex: 1; justify-content: flex-end; }
+
+/* Style 3: Logo and Menu Left Aligned Together */
+.website_header.alignment-inline-left .left-side { order: 1; flex: initial; margin-right: 40px; }
+.website_header.alignment-inline-left .center-side { order: 2; flex: 1; justify-content: flex-start; }
+.website_header.alignment-inline-left .right-side { order: 3; flex: initial; }
+
+
+/* --- Main Navigation Menu --- */
+.website_header .menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 28px; 
+}
+
+.website_header .menu-link {
+  position: relative; 
+}
+
+.website_header .menu-link > a {
+  text-decoration: none;
+  color: var(--header-text);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 0;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.website_header .menu-link > a:hover {
+  color: var(--header-accent);
+}
+
+/* --- Dropdown Child (Level 1) --- */
+.website_header .dropdown-child {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--header-bg);
+  min-width: 220px;
+  display: flex;
+  flex-direction: column; 
+  gap: 0;
+  padding: 12px 0;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+  border: 1px solid #f1f5f9;
+  
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Dropdown Grandchild (Level 2) --- */
+.website_header .dropdown-grandchild {
+  position: absolute;
+  top: 0;
+  left: 100%; 
+  background-color: var(--header-bg);
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 12px 0;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f1f5f9;
+  
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(15px); 
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Dropdown Links Hover & Styling --- */
+.website_header .dropdown-child .menu-link > a,
+.website_header .dropdown-grandchild .menu-link > a {
+  padding: 10px 24px;
+  color: var(--header-text);
+  opacity: 0.85;
+  font-size: 14px;
+  font-weight: 400;
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+  transition: all 0.2s ease;
+}
+
+.website_header .dropdown-child .menu-link > a:hover,
+.website_header .dropdown-grandchild .menu-link > a:hover {
+  background-color: rgba(0,0,0,0.02);
+  color: var(--header-accent);
+  opacity: 1;
+  padding-left: 28px; 
+}
+
+/* --- Hover Triggers --- */
+.website_header .menu-link:hover > .dropdown-child { opacity: 1; visibility: visible; transform: translateY(0); }
+.website_header .dropdown-child .menu-link:hover > .dropdown-grandchild { opacity: 1; visibility: visible; transform: translateX(0); }
+
+/* --- Premium Cart Button Styling --- */
+.header-cart-btn {
+  position: relative;
+  color: var(--header-text);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+  padding: 5px;
+}
+
+.header-cart-btn:hover {
+  color: var(--header-accent);
+}
+
+/* Cart Badge Styling */
+.cart-count-badge {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  background-color: var(--header-accent);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}

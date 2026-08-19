@@ -1,8 +1,18 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
-    "page_width": 1200,
-    "font_heading": "assistant_n4",
-    "font_size_base": 16
+    "page_width": 1040,
+    "font_heading": "anton_n4",
+    "font_size_base": 19,
+    "content_for_index": []
   },
   "presets": {
     "default": {
@@ -12,4 +22,3 @@
     }
   }
 }
-

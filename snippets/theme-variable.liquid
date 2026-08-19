@@ -1,8 +1,17 @@
 {% style %}
+  /* 1. Shopify se selected font download karein */
   {{ settings.font_heading | font_face: font_display: 'swap' }}
 
   :root {
+     /* 2. Layout Setting */
      --page-width: {{ settings.page_width }}px;
-     --body-font: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
+
+     /* 3. Heading Font Setting */
+     --font-heading-family: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
+     --font-heading-style: {{ settings.font_heading.style }};
+     --font-heading-weight: {{ settings.font_heading.weight }};
+
+     /* 4. Base Font Size Setting (Jo aapke code mein missing tha) */
+     --font-size-base: {{ settings.font_size_base }}px;
   }
 {% endstyle %}

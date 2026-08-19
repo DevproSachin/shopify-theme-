@@ -6,11 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{ content_for_header }}
     {% render 'theme-variable' %}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
   </head>
   <body>
     <header>
-      <h1>Playground with codersachin shrma.change made now.
-      </h1>
       {% sections 'header-group' %}
     </header>
     <main>

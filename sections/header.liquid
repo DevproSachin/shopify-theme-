@@ -1,1 +1,130 @@
-<h1> {{ shop.name }}</h1>
+<div class="website_header alignment-{{ section.settings.header_alignment }}" style="
+  --header-bg: {{ section.settings.bg_color }};
+  --header-text: {{ section.settings.text_color }};
+  --header-accent: {{ section.settings.accent_color }};
+  --logo-max-height: {{ section.settings.logo_height }}px;
+">
+  
+  <!-- 1. LEFT / LOGO SIDE -->
+  <div class="left-side">
+    {%- if section.settings.header_logo != blank -%}
+      <a href="/" class="logo-link">
+        {{ section.settings.header_logo | image_url: width: 300 | image_tag: class: 'header-logo-img' }}
+      </a>
+    {%- else -%}
+      <a href="/" class="shop-name">{{ shop.name }}</a>
+    {%- endif -%}
+  </div>
+  
+  <!-- 2. CENTER / NAVIGATION SIDE -->
+  <div class="center-side">
+    <ul class="menu">
+      {% for link in section.settings.menu.links %}
+        <li class="menu-link">
+          <a href="{{ link.url }}">{{ link.title }}</a>
+
+          {% if link.links.size > 0 %}
+            <ul class="menu dropdown-child">
+              {% for child_link in link.links %}
+                <li class="menu-link">
+                  <a href="{{ child_link.url }}">{{ child_link.title }}</a>
+
+                  {% if child_link.links.size > 0 %}
+                    <ul class="menu dropdown-grandchild">
+                      {% for grandchild_link in child_link.links %}
+                        <li class="menu-link">
+                          <a href="{{ grandchild_link.url }}">{{ grandchild_link.title }}</a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- 3. RIGHT / ICONS & CART SIDE -->
+  <div class="right-side">
+    <a href="/cart" class="header-cart-btn" aria-label="Cart">
+      <!-- Minimal SVG Cart Icon -->
+      <svg class="icon icon-cart" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+      </svg>
+      <!-- Dynamic Dynamic Shopify Cart Count Badge -->
+      <span class="cart-count-badge">{{ cart.item_count }}</span>
+    </a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "header_logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "min": 30,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "label": "Logo Maximum Height",
+      "default": 50
+    },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header Alignment Layout",
+      "options": [
+        { "value": "left", "label": "Logo Left, Menu Center" },
+        { "value": "center", "label": "Logo Center, Menu Left" },
+        { "value": "inline-left", "label": "Logo & Menu Left Linked" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "Header Colors Styling"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1e293b"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Hover / Accent Color",
+      "default": "#4f46e5"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header"
+    }
+  ]
+}
+{% endschema %}

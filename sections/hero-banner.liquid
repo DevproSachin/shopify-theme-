@@ -1,15 +1,172 @@
-<div>
-    {{ 'detailed-apparel-1' | placeholder_svg_tag }}
+{%- style -%}
+  /* --- 1. Dynamic CSS for Local Section (Scoped by Section ID) --- */
+  #Banner-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.7 | round }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.7 | round }}px;
+    background-color: {{ section.settings.bg_color }};
+  }
+
+  #Banner-{{ section.id }} .banner__heading {
+    font-size: {{ section.settings.heading_size | times: 0.8 | round }}px;
+    color: {{ section.settings.text_color }};
+  }
+
+  #Banner-{{ section.id }} .banner__text {
+    font-size: 14px;
+    color: {{ section.settings.text_color }};
+    opacity: 0.9;
+    margin-top: 10px;
+  }
+
+  /* --- 2. Responsive Styling for Desktop Screens (min-width: 750px) --- */
+  @media screen and (min-width: 750px) {
+    #Banner-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+    #Banner-{{ section.id }} .banner__heading {
+      font-size: {{ section.settings.heading_size }}px;
+    }
+    #Banner-{{ section.id }} .banner__text {
+      font-size: 16px;
+    }
+  }
+
+  /* --- 3. Static Structure CSS for Layout Control --- */
+  .banner-wrapper {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .banner__content {
+    text-align: {{ section.settings.desktop_content_alignment }};
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .banner__heading {
+    margin: 0;
+    font-family: var(--font-heading-family); /* Base.css / Global variable se load hoga */
+    line-height: 1.2;
+    font-weight: bold;
+  }
+{%- endstyle -%}
+
+<!-- --- 4. HTML Structure --- -->
+<div id="Banner-{{ section.id }}" class="banner-wrapper {% if section.settings.full_width == false %}page-width{% endif %}">
+  <!-- Dynamic Layout Wrapper: Agar full width checkbox unchecked hai to global page-width class lag jayegi -->
+  <div class="sachin">
+    
+    <div class="banner__content">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="banner__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.text != blank -%}
+        <div class="banner__text">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+        {% render 'product-card' product:'product' %}
+  </div>
 </div>
 
-{% schema %}  
+<!-- --- 5. Professional Section Schema Configuration --- -->
+{% schema %}
 {
-   "name" : "Hero banner",
-   "settings" : [],
-   "presets" :[
-     {
-       "name" : "Hero banner"
+  "name": "Hero Banner",
+  "tag": "section",
+  "class": "section-custom-banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Make section full width",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center",
+      "label": "Content Alignment"
+    },
+    {
+      "type": "header",
+      "content": "Content & Typography"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Banner Heading",
+      "default": "Welcome to our store"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size",
+      "default": 40
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Banner Description",
+      "default": "<p>Share information about your brand with your customers using this custom section.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Color Customization"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f4f4f4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing (Padding)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 40
     }
-   ]
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
 }
 {% endschema %}
