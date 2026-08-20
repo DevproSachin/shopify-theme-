@@ -64,21 +64,7 @@
   <div class="right-side">
     <a href="{{ routes.cart_url }}" class="header-cart-btn" aria-label="Cart">
       <!-- Minimal SVG Cart Icon -->
-      <svg
-        class="icon icon-cart" 
-        viewBox="0 0 24 24"
-        width="24"
-        height="24"
-        stroke="currentColor"
-        stroke-width="2"
-        fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <circle cx="9" cy="21" r="1"></circle>
-        <circle cx="20" cy="21" r="1"></circle>
-        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-      </svg>
+       {% render 'icon', icon_name: 'shopping-bag', icon_size: 22, icon_stroke: 1.5, extra_class: 'shopping-icon' %}
       <!-- Dynamic Dynamic Shopify Cart Count Badge -->
       <span class="cart-count-badge">{{ cart.item_count }}</span>
     </a>
