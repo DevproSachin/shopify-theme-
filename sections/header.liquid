@@ -10,11 +10,11 @@
   <!-- 1. LEFT / LOGO SIDE -->
   <div class="left-side">
     {%- if section.settings.header_logo != blank -%}
-      <a href="/" class="logo-link">
+      <a href="{{ routes.root_url }}" class="logo-link">
         {{ section.settings.header_logo | image_url: width: 300 | image_tag: class: 'header-logo-img' }}
       </a>
     {%- else -%}
-      <a href="/" class="shop-name">{{ shop.name }}</a>
+      <a href="{{ routes.root_url }}" class="shop-name">{{ shop.name }}</a>
     {%- endif -%}
   </div>
 
@@ -62,10 +62,10 @@
 
   <!-- 3. RIGHT / ICONS & CART SIDE -->
   <div class="right-side">
-    <a href="/cart" class="header-cart-btn" aria-label="Cart">
+    <a href="{{ routes.cart_url }}" class="header-cart-btn" aria-label="Cart">
       <!-- Minimal SVG Cart Icon -->
       <svg
-        class="icon icon-cart"
+        class="icon icon-cart" 
         viewBox="0 0 24 24"
         width="24"
         height="24"
