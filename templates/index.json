@@ -22,9 +22,58 @@
         "padding_top": 56,
         "padding_bottom": 40
       }
+    },
+    "multi_block_PCfzi9": {
+      "type": "Multi-block",
+      "blocks": {
+        "heading_block_mJxcyT": {
+          "type": "heading_block",
+          "settings": {
+            "heading_text": "hjhkhkhkhjkhjkj",
+            "heading_size": "h1",
+            "heading_color": "#000000"
+          }
+        },
+        "subheading_block_VpH6fE": {
+          "type": "subheading_block",
+          "settings": {
+            "subheading_text": "dasdasdasd",
+            "subheading_color": "#666666"
+          }
+        },
+        "description_block_ANpawF": {
+          "type": "description_block",
+          "settings": {
+            "description_text": "",
+            "text_alignment": "left"
+          }
+        },
+        "action_block_JFfheg": {
+          "type": "action_block",
+          "settings": {
+            "button_label": "Click Here",
+            "button_link": "shopify://products/the-3p-fulfilled-snowboard",
+            "open_in_new_tab": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_block_mJxcyT",
+        "subheading_block_VpH6fE",
+        "description_block_ANpawF",
+        "action_block_JFfheg"
+      ],
+      "name": "Multi-Block Section",
+      "settings": {
+        "section_title": "Our Services",
+        "background_color": "#3e2c2c",
+        "padding_top": 100,
+        "padding_bottom": 100
+      }
     }
   },
   "order": [
-    "hero"
+    "hero",
+    "multi_block_PCfzi9"
   ]
 }

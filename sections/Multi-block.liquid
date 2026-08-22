@@ -1,0 +1,211 @@
+<div
+  class="richtext page-width"
+  style="
+     --padding-top: {{ section.settings.padding_top }}px;
+    --padding-bottom : {{ section.settings.padding_bottom}}px;
+    --bg-color :{{section.settings.background_color }};
+  "
+>
+  <div class="section-title">
+    {%- if section.settings.section_title != blank -%}
+      {{ section.settings.section_title }}
+    {%- endif -%}
+  </div>
+
+  {% for block in section.blocks %}
+    <div class=" block content " {{ block.shopify_attributes }} style="
+                     --heading-color:{{ block.settings.heading_color }};
+                     --heading-size: {% if block.settings.heading_size == 'h2' %}
+                      0.8rem
+                    {% elsif block.settings.heading_size == 'h1' %}
+                      1.2rem
+                    {% else %}
+                      1.6rem
+                    {% endif %};
+                ">
+                     {% case block.type %}
+                       {% when "heading_block" %}
+                          <div class="caption-heading"> 
+                             <h1 class="hding">
+                               {%- if block.settings.heading_text != blank -%}
+                                 {{ block.settings.heading_text }}
+                               {%- endif -%}
+                             </h1> 
+                        </div>
+                       
+                       {% when "subheading_block" %}
+                           <div class="Descriptiom">  
+                             {%- if block.settings.subheading_text != blank -%}
+                               {{ block.settings.subheading_text }} 
+                             {%- endif -%}  
+                        </div>
+                       
+                         {% when "description_block" %}
+                           <div class="description_text alignment-{{block.settings.text_alignment}}">  
+                             {%- if block.settings.description_text != blank -%}
+                               {{ block.settings.description_text }} 
+                             {%- endif -%}  
+                        </div>
+
+                         {% when "action_block" %}
+                           <div class="description_text">  
+                             {%- if block.settings.button_label != blank -%}
+                               {%- assign button_text = block.settings.button_label -%}
+                               
+                               {% if block.settings.open_in_new_tab == true %}
+                                 <a href="{{ block.settings.button_link }}" target="_blank">{{ button_text }}</a> 
+                               {% else %}
+                                 <a href="{{ block.settings.button_link }}">{{ button_text }}</a>   
+                               {% endif %}
+                             {%- endif -%}
+                        </div>
+                     {% endcase %}
+               </div>
+      {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Multi-Block Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Main Title",
+      "default": "Our Features"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading_block",
+      "name": "Heading Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading_text",
+          "label": "Heading Text",
+          "default": "Block Heading Title"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Heading Size",
+          "options": [
+            { "value": "h2", "label": "Small" },
+            { "value": "h1", "label": "Medium" },
+            { "value": "h0", "label": "Large" }
+          ],
+          "default": "h1"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Heading Color",
+          "default": "#000000"
+        }
+      ]
+    },
+    {
+      "type": "subheading_block",
+      "name": "Subheading Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "subheading_text",
+          "label": "Subheading Text",
+          "default": "Add your subtitle here"
+        },
+        {
+          "type": "color",
+          "id": "subheading_color",
+          "label": "Subheading Color",
+          "default": "#666666"
+        }
+      ]
+    },
+    {
+      "type": "description_block",
+      "name": "Description Block",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "description_text",
+          "label": "Description Text",
+          "default": "<p>Share information about your brand with your customers using this text block.</p>"
+        },
+        {
+          "type": "select",
+          "id": "text_alignment",
+          "label": "Text Alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "center"
+        }
+      ]
+    },
+    {
+      "type": "action_block",
+      "name": "Button/Action Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Click Here"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_in_new_tab",
+          "label": "Open link in new tab",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Multi-Block Section",
+      "blocks": [
+        { "type": "heading_block" },
+        { "type": "subheading_block" },
+        { "type": "description_block" },
+        { "type": "action_block" }
+      ]
+    }
+  ]
+}
+{% endschema %}
