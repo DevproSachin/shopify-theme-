@@ -56,8 +56,9 @@
   <div class="sachin">
     
     <div class="banner__content">
+       {{ 'general.msg' | t  }}
       {%- if section.settings.heading != blank -%}
-        <h2 class="banner__heading">{{ section.settings.heading }}</h2>
+        <h2 class="banner__heading">{{ section.settings.heading  }}</h2>
       {%- endif -%}
 
       {%- if section.settings.text != blank -%}
@@ -79,6 +80,7 @@
       "type": "header",
       "content": "Layout Settings"
     },
+
     {
       "type": "checkbox",
       "id": "full_width",
@@ -104,7 +106,7 @@
       "type": "inline_richtext",
       "id": "heading",
       "label": "Banner Heading",
-      "default": "Welcome to our store"
+      "default": "welcome to our store"
     },
     {
       "type": "range",
